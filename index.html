@@ -64,17 +64,28 @@ button{
     box-shadow:0 0 25px rgba(255,0,120,0.5);
 }
 
-/* CORAZONES Y ROSAS */
-.corazon, .rosa{
+/* CORAZONES, ROSAS Y MONITOS */
+.corazon, .rosa, .monito{
     position:fixed;
     font-size:24px;
     animation: flotar 7s linear infinite;
+}
+
+.monito{
+    font-size:32px;
+    animation: colgar 6s linear infinite;
 }
 
 @keyframes flotar{
     0%{bottom:-50px; opacity:0;}
     50%{opacity:1;}
     100%{bottom:110vh; opacity:0;}
+}
+
+@keyframes colgar{
+    0%{top:-50px; transform:rotate(0deg);}
+    50%{top:50vh; transform:rotate(20deg);}
+    100%{top:110vh; transform:rotate(-20deg);}
 }
 </style>
 </head>
@@ -114,8 +125,6 @@ function noAceptar(){
         "🐵💔 Mejor Voy a Comer mi Platano Dijiste No... 🍌😢";
         document.getElementById("mono").style.display="block";
         document.getElementById("fotoAlex").style.display="none";
-        lanzarCorazones();
-        lanzarRosas();
     }
 }
 
@@ -124,19 +133,19 @@ function siAcepta(){
     "💖 Te amo mi Cuchis Besos 💖<br>Gracias por aceptar ser mi enamorada 🥰";
     document.getElementById("fotoAlex").style.display="block";
     document.getElementById("mono").style.display="none";
-    lanzarCorazones();
-    lanzarRosas();
 }
 
+// FUNCIONES DE EFECTOS AUTOMÁTICOS
 function lanzarCorazones(){
     setInterval(()=>{
         let c=document.createElement("div");
         c.className="corazon";
         c.innerHTML="💖";
         c.style.left=Math.random()*100+"vw";
+        c.style.fontSize=(20+Math.random()*20)+"px"; // tamaños variados
         document.body.appendChild(c);
         setTimeout(()=>c.remove(),7000);
-    },300);
+    },150); // más frecuencia
 }
 
 function lanzarRosas(){
@@ -145,10 +154,29 @@ function lanzarRosas(){
         r.className="rosa";
         r.innerHTML="🌹";
         r.style.left=Math.random()*100+"vw";
+        r.style.fontSize=(20+Math.random()*15)+"px";
         document.body.appendChild(r);
         setTimeout(()=>r.remove(),8000);
+    },200);
+}
+
+function lanzarMonitos(){
+    setInterval(()=>{
+        let m=document.createElement("div");
+        m.className="monito";
+        m.innerHTML="🐵";
+        m.style.left=Math.random()*100+"vw";
+        document.body.appendChild(m);
+        setTimeout(()=>m.remove(),7000);
     },500);
 }
+
+// INICIAR EFECTOS AUTOMÁTICOS AL CARGAR
+window.onload = ()=>{
+    lanzarCorazones();
+    lanzarRosas();
+    lanzarMonitos();
+};
 </script>
 
 </body>
