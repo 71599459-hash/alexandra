@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Alexandra 💖</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffd6e8,#ffeaf3);
+    overflow:hidden;
+    font-family:'Segoe UI', sans-serif;
+}
+
+.card{
+    background:white;
+    width:420px;
+    padding:30px;
+    border-radius:30px;
+    box-shadow:0 0 30px rgba(255,105,180,0.4);
+    text-align:center;
+    position:relative;
+    z-index:5;
+}
+
+h1{ color:#ff3e8e; }
+
+button{
+    padding:15px 30px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+    margin:10px;
+}
+
+.si{
+    background:#ff3e8e;
+    color:white;
+}
+
+.no{
+    background:#adb5bd;
+    color:white;
+    position:absolute;
+}
+
+#resultado{
+    margin-top:30px;
+    font-size:18px;
+    color:#ff3e8e;
+}
+
+/* IMÁGENES */
+.imagenGrande{
+    display:none;
+    width:280px;
+    margin:20px auto;
+    border-radius:25px;
+    box-shadow:0 0 25px rgba(255,0,120,0.5);
+}
+
+/* CORAZONES Y ROSAS */
+.corazon, .rosa{
+    position:fixed;
+    font-size:24px;
+    animation: flotar 7s linear infinite;
+}
+
+@keyframes flotar{
+    0%{bottom:-50px; opacity:0;}
+    50%{opacity:1;}
+    100%{bottom:110vh; opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>💖 Alexandra 💖</h1>
+    <h2>¿Aceptas ser mi enamorada?</h2>
+
+    <button class="si" onclick="siAcepta()">Sí acepto 💕</button>
+    <button class="no" id="noBtn" onclick="noAceptar()">No acepto 😢</button>
+
+    <div id="resultado"></div>
+
+    <!-- IMÁGENES -->
+    <img src="alexandra.jpeg" id="fotoAlex" class="imagenGrande">
+    <img src="mono.png" id="mono" class="imagenGrande">
+</div>
+
+<script>
+let intentos = 0;
+let noBtn = document.getElementById("noBtn");
+
+function noAceptar(){
+    intentos++;
+
+    if(intentos < 6){
+        let x = Math.random() * 250;
+        let y = Math.random() * 200;
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+
+    if(intentos === 6){
+        document.getElementById("resultado").innerHTML =
+        "🐵💔 Mejor Voy a Comer mi Platano Dijiste No... 🍌😢";
+        document.getElementById("mono").style.display="block";
+        document.getElementById("fotoAlex").style.display="none";
+        lanzarCorazones();
+        lanzarRosas();
+    }
+}
+
+function siAcepta(){
+    document.getElementById("resultado").innerHTML =
+    "💖 Te amo mi cuchis Alexandra 💖<br>Gracias por aceptar ser mi enamorada 🥰";
+    document.getElementById("fotoAlex").style.display="block";
+    document.getElementById("mono").style.display="none";
+    lanzarCorazones();
+    lanzarRosas();
+}
+
+function lanzarCorazones(){
+    setInterval(()=>{
+        let c=document.createElement("div");
+        c.className="corazon";
+        c.innerHTML="💖";
+        c.style.left=Math.random()*100+"vw";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),7000);
+    },300);
+}
+
+function lanzarRosas(){
+    setInterval(()=>{
+        let r=document.createElement("div");
+        r.className="rosa";
+        r.innerHTML="🌹";
+        r.style.left=Math.random()*100+"vw";
+        document.body.appendChild(r);
+        setTimeout(()=>r.remove(),8000);
+    },500);
+}
+</script>
+
+</body>
+</html>
